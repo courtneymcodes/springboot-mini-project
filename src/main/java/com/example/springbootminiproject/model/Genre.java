@@ -23,7 +23,7 @@ public class Genre {
     private List<Book> bookList;
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "user")
+    @JoinColumn(name = "user_id")
     private User user;
     public Genre() {
     }
