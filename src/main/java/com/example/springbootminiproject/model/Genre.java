@@ -1,6 +1,7 @@
 package com.example.springbootminiproject.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "genre")
@@ -13,6 +14,8 @@ public class Genre {
     private String name;
     @Column
     private String description;
+    @OneToMany
+    private List<Book> bookList;
     public Genre() {
     }
 
