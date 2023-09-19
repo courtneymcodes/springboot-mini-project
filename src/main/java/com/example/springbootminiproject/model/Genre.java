@@ -1,15 +1,18 @@
 package com.example.springbootminiproject.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
 public class Genre {
     @Id
+    @Column
     private Long id;
+    @Column
     private String name;
+    @Column
     private String description;
-
     public Genre() {
     }
 
