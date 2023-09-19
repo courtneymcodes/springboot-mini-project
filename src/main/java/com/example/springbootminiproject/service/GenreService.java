@@ -2,6 +2,7 @@ package com.example.springbootminiproject.service;
 
 import com.example.springbootminiproject.exception.InformationExistsException;
 import com.example.springbootminiproject.exception.InformationNotFoundException;
+import com.example.springbootminiproject.model.Book;
 import com.example.springbootminiproject.model.Genre;
 import com.example.springbootminiproject.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,6 +90,15 @@ public class GenreService {
             return genreOptional.get();
         }else {
             throw new InformationNotFoundException("Genre with id " + genreId + " not found");
+        }
+    }
+
+    public List<Book> getGenreBooks(Long genreId){
+        Optional<Genre> genreOptional = genreRepository.findById(genreId);
+        if(genreOptional.isPresent()) {
+            return genreOptional.get().getBookList();
+        }else {
+            throw new InformationNotFoundException("Genre with id "+ genreId + " not found");
         }
     }
 
