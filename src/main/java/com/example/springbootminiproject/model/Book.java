@@ -18,6 +18,7 @@ public class Book {
     @Column
     private String summary;
     @ManyToOne
+    @JoinColumn(name = "book_id")
     private Genre genre;
 
     public Book() {
