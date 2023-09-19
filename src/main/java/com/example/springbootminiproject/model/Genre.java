@@ -3,6 +3,7 @@ package com.example.springbootminiproject.model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "genre")
 public class Genre {
     @Id
     @Column
