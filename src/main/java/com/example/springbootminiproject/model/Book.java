@@ -17,6 +17,8 @@ public class Book {
     private int publicationDate;
     @Column
     private String summary;
+    @ManyToOne
+    private Genre genre;
 
     public Book() {
     }
