@@ -1,5 +1,6 @@
 package com.example.springbootminiproject.controller;
 
+import com.example.springbootminiproject.model.Book;
 import com.example.springbootminiproject.model.Genre;
 import com.example.springbootminiproject.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,5 +65,10 @@ public class GenreController {
     @DeleteMapping(path = "/genres/{genreId}/")
     public Genre deleteGenre(@PathVariable Long genreId){
         return genreService.deleteGenre(genreId);
+    }
+
+    @GetMapping(path = "/genres/{genreId}/books/")
+    public List<Book> getGenreBooks(@PathVariable Long genreId){
+        return genreService.getGenreBooks(genreId);
     }
 }
