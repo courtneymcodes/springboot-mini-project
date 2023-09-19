@@ -71,4 +71,15 @@ public class Book {
     public void setSummary(String summary) {
         this.summary = summary;
     }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", author='" + author + '\'' +
+                ", title='" + title + '\'' +
+                ", publicationDate=" + publicationDate +
+                ", summary='" + summary + '\'' +
+                '}';
+    }
 }
