@@ -1,5 +1,7 @@
 package com.example.springbootminiproject.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -17,6 +19,7 @@ public class Book {
     private int publicationDate;
     @Column
     private String summary;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "book_id")
     private Genre genre;
