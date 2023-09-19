@@ -8,4 +8,7 @@ public class Book {
     private String title;
     private int publicationDate;
     private String summary;
+
+    public Book() {
+    }
 }
