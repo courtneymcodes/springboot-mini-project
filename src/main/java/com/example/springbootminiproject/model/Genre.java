@@ -1,5 +1,9 @@
 package com.example.springbootminiproject.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -15,6 +19,7 @@ public class Genre {
     @Column
     private String description;
     @OneToMany(mappedBy = "genre", orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Book> bookList;
     public Genre() {
     }
