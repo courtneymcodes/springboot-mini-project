@@ -1,13 +1,17 @@
 package com.example.springbootminiproject.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
 public class User {
     @Id
+    @Column
     private Long id;
+    @Column
     private String emailAddress;
+    @Column
     private String password;
 
     public User() {
