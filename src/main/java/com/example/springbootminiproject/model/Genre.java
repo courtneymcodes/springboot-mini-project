@@ -14,7 +14,7 @@ public class Genre {
     private String name;
     @Column
     private String description;
-    @OneToMany
+    @OneToMany(mappedBy = "genre", orphanRemoval = true)
     private List<Book> bookList;
     public Genre() {
     }
