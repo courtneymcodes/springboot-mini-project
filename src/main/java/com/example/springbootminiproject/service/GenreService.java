@@ -54,4 +54,20 @@ public class GenreService {
             throw new InformationNotFoundException("Genre with id " + genreId + " not found");
         }
     }
+
+    public Genre updateGenre(Long genreId, Genre genreObject) {
+        Optional<Genre> genreOptional = genreRepository.findById(genreId);
+        if (genreOptional.isPresent()) {
+            if (genreOptional.get().getName().equals(genreObject.getName()) && genreOptional.get().getDescription().equals(genreObject.getDescription())) {
+                throw new InformationExistsException("Genre name " + genreObject.getName() + " and description " + genreObject.getDescription() + " already exists");
+            } else {
+                Genre updateGenre = genreRepository.findById(genreId).get();
+                updateGenre.setName(genreObject.getName());
+                updateGenre.setDescription(genreObject.getDescription());
+                return genreRepository.save(updateGenre);
+            }
+        } else {
+            throw new InformationNotFoundException("Genre with id " + genreId + " not found");
+        }
+    }
 }
