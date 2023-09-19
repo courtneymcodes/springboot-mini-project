@@ -23,6 +23,10 @@ public class Book {
     @ManyToOne
     @JoinColumn(name = "book_id")
     private Genre genre;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;
 
     public Book() {
     }
