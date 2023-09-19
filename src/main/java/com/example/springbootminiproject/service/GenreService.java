@@ -1,6 +1,7 @@
 package com.example.springbootminiproject.service;
 
 import com.example.springbootminiproject.exception.InformationExistsException;
+import com.example.springbootminiproject.exception.InformationNotFoundException;
 import com.example.springbootminiproject.model.Genre;
 import com.example.springbootminiproject.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class GenreService {
     }
 
     /**
-     *Saves an genre object to the database when a POST request is made to /genres endpoint
+     *Saves a genre object to the database when a POST request is made to /genres endpoint
      * @param genreObject from request body
      * @return category object to save to the database
      * @throws InformationExistsException if a category with same id already exists in the database
@@ -40,4 +41,12 @@ public class GenreService {
         }
     }
 
+    public Genre getGenre(Long genreId){
+        Optional<Genre> genreOptional = genreRepository.findById(genreId);
+        if(genreOptional.isPresent()){
+            return genreOptional.get();
+        } else {
+            throw new InformationNotFoundException("Genre with id " + genreId + " not found");
+        }
+    }
 }
