@@ -35,6 +35,11 @@ public class GenreController {
         return genreService.createGenre(genreObject);
     }
 
+    /**
+     * returns the result of calling getGenre method on genreService when i GET request is made to /genres/{genreId}/ endpoint
+     * @param genreId url path variable
+     * @return a genre object
+     */
     @GetMapping(path = "/genres/{genreId}/")
     public Genre getGenre(@PathVariable Long genreId){
         return genreService.getGenre(genreId);

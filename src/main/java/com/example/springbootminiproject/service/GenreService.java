@@ -41,6 +41,11 @@ public class GenreService {
         }
     }
 
+    /**
+     * Gets a genre object by its id
+     * @param genreId path variable
+     * @return a genre object
+     */
     public Genre getGenre(Long genreId){
         Optional<Genre> genreOptional = genreRepository.findById(genreId);
         if(genreOptional.isPresent()){
