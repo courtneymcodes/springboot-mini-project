@@ -18,6 +18,10 @@ public class GenreController {
         this.genreService = genreService;
     }
 
+    /**
+     * Returns the result of calling the getGenres method on the GenreService class when a GET request is made to /genres endpoint
+     * @return a list of all genres in the database
+     */
     @GetMapping(path = "/genres/")
     public List<Genre> getGenres(){
         return genreService.getGenres();

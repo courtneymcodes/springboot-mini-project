@@ -15,6 +15,10 @@ public class GenreService {
         this.genreRepository = genreRepository;
     }
 
+    /**
+     * Gets all genres from the database when a GET request is made to /genres endpoint
+     * @return a list of all genres in the database
+     */
     public List<Genre> getGenres() {
         return genreRepository.findAll();
     }
