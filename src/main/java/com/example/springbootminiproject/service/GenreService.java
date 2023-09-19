@@ -4,19 +4,26 @@ import com.example.springbootminiproject.exception.InformationExistsException;
 import com.example.springbootminiproject.exception.InformationNotFoundException;
 import com.example.springbootminiproject.model.Book;
 import com.example.springbootminiproject.model.Genre;
+import com.example.springbootminiproject.repository.BookRepository;
 import com.example.springbootminiproject.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
 public class GenreService {
     private GenreRepository genreRepository;
+    private BookRepository bookRepository;
     @Autowired
     public void setGenreRepository(GenreRepository genreRepository) {
         this.genreRepository = genreRepository;
+    }
+    @Autowired
+    public void setBookRepository(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
     }
 
     /**
@@ -101,6 +108,5 @@ public class GenreService {
             throw new InformationNotFoundException("Genre with id "+ genreId + " not found");
         }
     }
-
 
 }
