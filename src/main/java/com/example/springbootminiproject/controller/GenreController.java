@@ -45,6 +45,12 @@ public class GenreController {
         return genreService.getGenre(genreId);
     }
 
+    /**
+     * returns the result of calling updateGenre method on genreService when PUT request is made to /genres/{genreId}/ endpoint
+     * @param genreId path variable
+     * @param genreObject an object of Genre type
+     * @return a genre object updated in database
+     */
     @PutMapping(path = "/genres/{genreId}")
     public Genre updateGenre(@PathVariable Long genreId, @RequestBody Genre genreObject){
         return genreService.updateGenre(genreId, genreObject);

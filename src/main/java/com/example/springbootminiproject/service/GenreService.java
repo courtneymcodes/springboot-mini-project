@@ -55,6 +55,12 @@ public class GenreService {
         }
     }
 
+    /**
+     * Updates an existing genre in the database
+     * @param genreId a path variable of type Long
+     * @param genreObject a genre object
+     * @return a genre object
+     */
     public Genre updateGenre(Long genreId, Genre genreObject) {
         Optional<Genre> genreOptional = genreRepository.findById(genreId);
         if (genreOptional.isPresent()) {
@@ -70,4 +76,6 @@ public class GenreService {
             throw new InformationNotFoundException("Genre with id " + genreId + " not found");
         }
     }
+
+    
 }
