@@ -56,6 +56,11 @@ public class GenreController {
         return genreService.updateGenre(genreId, genreObject);
     }
 
+    /**
+     * Returns the result of calling deleteGenre method on genreService when DELETE request is made to /genres/{genreId}/ endpoint. Genre object is deleted from database
+     * @param genreId
+     * @return
+     */
     @DeleteMapping(path = "/genres/{genreId}/")
     public Genre deleteGenre(@PathVariable Long genreId){
         return genreService.deleteGenre(genreId);

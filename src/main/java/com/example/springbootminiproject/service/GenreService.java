@@ -77,6 +77,11 @@ public class GenreService {
         }
     }
 
+    /**
+     * Deletes a genre from the database
+     * @param genreId a number type Long
+     * @return a Genre object
+     */
     public Genre deleteGenre(Long genreId){
         Optional<Genre> genreOptional = genreRepository.findById(genreId);
         if(genreOptional.isPresent()){
@@ -87,5 +92,5 @@ public class GenreService {
         }
     }
 
-    
+
 }
