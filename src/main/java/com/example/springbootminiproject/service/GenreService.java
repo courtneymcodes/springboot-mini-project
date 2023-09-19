@@ -77,5 +77,15 @@ public class GenreService {
         }
     }
 
+    public Genre deleteGenre(Long genreId){
+        Optional<Genre> genreOptional = genreRepository.findById(genreId);
+        if(genreOptional.isPresent()){
+            genreRepository.deleteById(genreId);
+            return genreOptional.get();
+        }else {
+            throw new InformationNotFoundException("Genre with id " + genreId + " not found");
+        }
+    }
+
     
 }
