@@ -21,6 +21,10 @@ public class Genre {
     @OneToMany(mappedBy = "genre", orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Book> bookList;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "user")
+    private User user;
     public Genre() {
     }
 
