@@ -33,8 +33,8 @@ public class GenreService {
      * @throws InformationExistsException if a category with same id already exists in the database
      */
     public Genre createGenre(Genre genreObject){
-        Optional<Genre> genreOptional = genreRepository.findById(genreObject.getId());
-        if(genreOptional.isEmpty()){
+        Genre genre = genreRepository.findByName(genreObject.getName());
+        if(genre == null){
             return genreRepository.save(genreObject);
         } else {
             throw new InformationExistsException("Genre with name " + genreObject.getName() + " already exists");
