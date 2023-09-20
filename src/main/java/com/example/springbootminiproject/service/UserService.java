@@ -17,6 +17,11 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    /**
+     * Registers a new user, adding them to the database. Password is hashed before it is stored.
+     * @param userObject
+     * @return a User object
+     */
     public User createUser(User userObject){
         if(!userRepository.existsByEmailAddress(userObject.getEmailAddress())){
             userObject.setPassword(passwordEncoder.encode(userObject.getPassword()));
