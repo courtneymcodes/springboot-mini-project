@@ -41,6 +41,14 @@ public class JWTRequestFilter extends OncePerRequestFilter {
         return null;
     }
 
+    /**
+     *
+     * @param request incoming http request
+     * @param response  outgoing http response
+     * @param filterChain continues processing request
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
