@@ -59,19 +59,30 @@ public class GenreController {
 
     /**
      * Returns the result of calling deleteGenre method on genreService when DELETE request is made to /genres/{genreId}/ endpoint. Genre object is deleted from database
-     * @param genreId
-     * @return
+     * @param genreId path variable type Long
+     * @return a Genre object
      */
     @DeleteMapping(path = "/genres/{genreId}/")
     public Genre deleteGenre(@PathVariable Long genreId){
         return genreService.deleteGenre(genreId);
     }
 
+    /**
+     * Returns the result of calling getGenreBooks on genreService
+     * @param genreId Long path variable
+     * @return a list of Books
+     */
     @GetMapping(path = "/genres/{genreId}/books/")
     public List<Book> getGenreBooks(@PathVariable Long genreId){
         return genreService.getGenreBooks(genreId);
     }
 
+    /**
+     * Returns the result of calling createGenreBook method on genreService to save book to databse
+     * @param genreId Long path variable
+     * @param bookObject an object of type Book
+     * @return a created book object
+     */
     @PostMapping(path = "/genres/{genreId}/books/")
     public Book createGenreBook(@PathVariable Long genreId, @RequestBody Book bookObject){
         return genreService.createGenreBook(genreId, bookObject);

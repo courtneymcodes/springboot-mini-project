@@ -53,6 +53,7 @@ public class GenreService {
      * Gets a genre object by its id
      * @param genreId path variable
      * @return a genre object
+     * @throws InformationNotFoundException no genre matching given id can be found in database
      */
     public Genre getGenre(Long genreId){
         Optional<Genre> genreOptional = genreRepository.findById(genreId);
@@ -68,6 +69,8 @@ public class GenreService {
      * @param genreId a path variable of type Long
      * @param genreObject a genre object
      * @return a genre object
+     * @throws InformationExistsException if data being updated already exists in database
+     * @throws InformationNotFoundException if genre with given id does not exist in database
      */
     public Genre updateGenre(Long genreId, Genre genreObject) {
         Optional<Genre> genreOptional = genreRepository.findById(genreId);
@@ -89,6 +92,7 @@ public class GenreService {
      * Deletes a genre from the database
      * @param genreId a number type Long
      * @return a Genre object
+     * @throws InformationNotFoundException if genre does not exist in database
      */
     public Genre deleteGenre(Long genreId){
         Optional<Genre> genreOptional = genreRepository.findById(genreId);
@@ -100,6 +104,12 @@ public class GenreService {
         }
     }
 
+    /**
+     * Gets a list of books associated with a genre. Finds a genre by its unique id and retrieves its bookList field
+     * @param genreId a unique number type Long used to
+     * @return a list of type Book
+     * throws InformationNotFoundException if genre does not exists in the database
+     */
     public List<Book> getGenreBooks(Long genreId){
         Optional<Genre> genreOptional = genreRepository.findById(genreId);
         if(genreOptional.isPresent()) {
@@ -109,6 +119,13 @@ public class GenreService {
         }
     }
 
+    /**
+     * Saves a Genre object to the database and associates it with a genre
+     * @param genreId a Long
+     * @param bookObject a book object from request body
+     * @return a book object to save to the database
+     * @throws InformationNotFoundException attempt of saving to database fails
+     */
     public Book createGenreBook(Long genreId, Book bookObject){
         try {
             Genre genre = genreRepository.findById(genreId).get();
