@@ -1,21 +1,18 @@
 package com.example.springbootminiproject.security;
 
+import com.example.springbootminiproject.model.User;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.HashSet;
 
 public class MyUserDetails implements UserDetails {
-    private final User user;
+
+    private User user;
 
     public MyUserDetails(User user) {
         this.user = user;
-    }
-
-    public User getUser() {
-        return user;
     }
 
     @Override
@@ -30,7 +27,7 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return user.getEmailAddress();
     }
 
     @Override
@@ -51,5 +48,9 @@ public class MyUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public User getUser() {
+        return user;
     }
 }
