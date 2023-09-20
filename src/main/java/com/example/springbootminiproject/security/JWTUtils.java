@@ -1,10 +1,10 @@
 package com.example.springbootminiproject.security;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Date;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class JWTUtils {
@@ -38,4 +38,29 @@ public class JWTUtils {
     public String getUserNameFromJwtToken(String token) {
         return Jwts.parserBuilder().setSigningKey(jwtSecret).build().parseClaimsJws(token).getBody().getSubject();
     }
+
+    /**
+     * Ensures that the jwt token is valid
+     * @param authToken the token needing validation
+     * @return a boolean; returns true if token is valid and false if it is not
+     * throws Exception
+     */
+    public boolean validateJwtToken(String authToken) {
+        try {
+            Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
+            return true;
+        } catch (SecurityException e) {
+            logger.log(Level.SEVERE, "Invalid JWT signature: {}", e.getMessage());
+        } catch (MalformedJwtException e) {
+            logger.log(Level.SEVERE, "Invalid JWT token: {}", e.getMessage());
+        } catch (ExpiredJwtException e) {
+            logger.log(Level.SEVERE, "JWT token is expired: {}", e.getMessage());
+        } catch (UnsupportedJwtException e) {
+            logger.log(Level.SEVERE, "JWT token is unsupported: {}", e.getMessage());
+        } catch (IllegalArgumentException e) {
+            logger.log(Level.SEVERE, "JWT claims string is empty: {}", e.getMessage());
+        }
+        return false;
+    }
+
 }
