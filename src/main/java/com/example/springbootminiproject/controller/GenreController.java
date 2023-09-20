@@ -71,4 +71,9 @@ public class GenreController {
     public List<Book> getGenreBooks(@PathVariable Long genreId){
         return genreService.getGenreBooks(genreId);
     }
+
+    @PostMapping(path = "/genres/{genreId}/books/")
+    public Book createGenreBook(@PathVariable Long genreId, @RequestBody Book bookObject){
+        return genreService.createGenreBook(genreId, bookObject);
+    }
 }
