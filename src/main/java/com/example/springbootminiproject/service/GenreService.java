@@ -109,4 +109,14 @@ public class GenreService {
         }
     }
 
+    public Book createGenreBook(Long genreId, Book bookObject){
+        try {
+            Genre genre = genreRepository.findById(genreId).get();
+            bookObject.setGenre(genre);
+            return bookRepository.save(bookObject);
+        }catch (NoSuchElementException e) {
+            throw new InformationNotFoundException("Genre with id " + genreId + " not found");
+        }
+    }
+
 }
