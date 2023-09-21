@@ -2,6 +2,8 @@ package com.example.springbootminiproject.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,9 +23,9 @@ public class SecurityConfiguration {
     }
 
     /**
-     * Configures security chain for http requests
-     * @param http an HttoSecurity object
-     * @return a filter chain configuration
+     * Configures security chain for http requests. Permits access to specific paths without authentication and requires authentication for all others. Grants access to h2 console
+     * @param http an HttpSecurity object
+     * @return a filter chain defining security configuration for the application
      * @throws Exception if any issue arises
      */
     @Bean
@@ -35,5 +37,10 @@ public class SecurityConfiguration {
                 .and().csrf().disable()
                 .headers().frameOptions().disable();
         return http.build();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+        return authConfig.getAuthenticationManager();
     }
 }
