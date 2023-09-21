@@ -22,6 +22,11 @@ public class SecurityConfiguration {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    public JwtRequestFilter authJwtRequestFilter() {
+        return new JwtRequestFilter();
+    }
+
     /**
      * Configures security chain for http requests. Permits access to specific paths without authentication and requires authentication for all others. Grants access to h2 console
      * @param http an HttpSecurity object

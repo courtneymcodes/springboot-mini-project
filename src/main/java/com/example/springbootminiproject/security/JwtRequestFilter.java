@@ -14,8 +14,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
-public class JWTRequestFilter extends OncePerRequestFilter {
+@Component
+public class JwtRequestFilter extends OncePerRequestFilter {
 
     private MyUserDetailsService myUserDetailsService;
     private JWTUtils jwtUtils;
