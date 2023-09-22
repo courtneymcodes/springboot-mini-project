@@ -18,9 +18,8 @@ import java.util.Optional;
 @RequestMapping(path = "auth/users")
 public class UserController {
     private UserService userService;
-
     @Autowired
-    public UserController(UserService userService) {
+    public void setUserService(UserService userService) {
         this.userService = userService;
     }
 
