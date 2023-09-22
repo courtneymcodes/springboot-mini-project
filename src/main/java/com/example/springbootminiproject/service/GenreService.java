@@ -146,13 +146,17 @@ public class GenreService {
      * @throws InformationNotFoundException attempt of saving to database fails
      */
     public Book createGenreBook(Long genreId, Book bookObject){
-        try {
-            Genre genre = genreRepository.findById(genreId).get();
-            bookObject.setGenre(genre);
-            return bookRepository.save(bookObject);
-        }catch (NoSuchElementException e) {
-            throw new InformationNotFoundException("Genre with id " + genreId + " not found");
+        Genre genre = genreRepository.findByIdAndUserId(genreId, GenreService.getCurrentLoggedInUser().getId());
+        if (genre == null) {
+            throw new InformationNotFoundException("category with id " + genreId + " does not belong to this user or category does not exist");
         }
+        Book item = bookRepository.findByTitleAndUserId(bookObject.getTitle(), GenreService.getCurrentLoggedInUser().getId());
+        if (item != null) {
+            throw new InformationExistsException("recipe with name " + item.getTitle() + " already exists");
+        }
+        bookObject.setUser(GenreService.getCurrentLoggedInUser());
+        bookObject.setGenre(genre);
+        return bookRepository.save(bookObject);
     }
 
 }
