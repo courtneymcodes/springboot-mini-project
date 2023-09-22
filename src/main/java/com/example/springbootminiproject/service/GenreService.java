@@ -84,7 +84,7 @@ public class GenreService {
     }
 
     /**
-     * Updates an existing genre in the database
+     * Updates an existing genre in the database belonging to logged in user
      * @param genreId a path variable of type Long
      * @param genreObject a genre object
      * @return a genre object
@@ -92,9 +92,9 @@ public class GenreService {
      * @throws InformationNotFoundException if genre with given id does not exist in database
      */
     public Genre updateGenre(Long genreId, Genre genreObject) {
-        Optional<Genre> genreOptional = genreRepository.findById(genreId);
-        if (genreOptional.isPresent()) {
-            if (genreOptional.get().getName().equals(genreObject.getName()) && genreOptional.get().getDescription().equals(genreObject.getDescription())) {
+        Genre genre = genreRepository.findByIdAndUserId(genreId, GenreService.getCurrentLoggedInUser().getId());
+        if (genre != null) {
+            if (genre.getName().equals(genreObject.getName()) && genre.getDescription().equals(genreObject.getDescription())) {
                 throw new InformationExistsException("Genre name " + genreObject.getName() + " and description " + genreObject.getDescription() + " already exists");
             } else {
                 Genre updateGenre = genreRepository.findById(genreId).get();
