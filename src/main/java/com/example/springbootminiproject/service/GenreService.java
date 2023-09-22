@@ -114,10 +114,10 @@ public class GenreService {
      * @throws InformationNotFoundException if genre does not exist in database
      */
     public Genre deleteGenre(Long genreId){
-        Optional<Genre> genreOptional = genreRepository.findById(genreId);
-        if(genreOptional.isPresent()){
+        Genre genre = genreRepository.findByIdAndUserId(genreId, GenreService.getCurrentLoggedInUser().getId());
+        if(genre != null){
             genreRepository.deleteById(genreId);
-            return genreOptional.get();
+            return genre;
         }else {
             throw new InformationNotFoundException("Genre with id " + genreId + " not found");
         }
