@@ -53,14 +53,15 @@ public class GenreService {
     }
 
     /**
-     *Saves a genre object to the database when a POST request is made to /genres endpoint
+     *Saves a genre object to the database when a POST request is made to /genres endpoint. Sets the user to logged in user
      * @param genreObject from request body
      * @return category object to save to the database
      * @throws InformationExistsException if a category with same id already exists in the database
      */
     public Genre createGenre(Genre genreObject){
-        Genre genre = genreRepository.findByName(genreObject.getName());
+        Genre genre = genreRepository.findByUserIdAndName(GenreService.getCurrentLoggedInUser().getId(), genreObject.getName());
         if(genre == null){
+            genreObject.setUser(GenreService.getCurrentLoggedInUser());
             return genreRepository.save(genreObject);
         } else {
             throw new InformationExistsException("Genre with name " + genreObject.getName() + " already exists");

@@ -9,7 +9,8 @@ import java.util.List;
 /**GenreRepository interface extends JpaRepository enabling it to inherit methods used to perform CRUD (Create, Read, Update, Delete) operations on entities of type Genre in the database*/
 @Repository
 public interface GenreRepository extends JpaRepository<Genre, Long> {
-    Genre findByName(String genreName);
     List<Genre> findByUserId(Long userId);
+    Genre findByUserIdAndName(Long UserId, String genreName);
+    Genre findByIdAndUserId(Long genreId, Long userId);
 
 }
