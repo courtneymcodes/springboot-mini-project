@@ -52,7 +52,7 @@ public class GenreController {
      * @param genreObject an object of Genre type
      * @return a genre object updated in database
      */
-    @PutMapping(path = "/genres/{genreId}")
+    @PutMapping(path = "/genres/{genreId}/")
     public Genre updateGenre(@PathVariable Long genreId, @RequestBody Genre genreObject){
         return genreService.updateGenre(genreId, genreObject);
     }
