@@ -130,9 +130,9 @@ public class GenreService {
      * throws InformationNotFoundException if genre does not exists in the database
      */
     public List<Book> getGenreBooks(Long genreId){
-        Optional<Genre> genreOptional = genreRepository.findById(genreId);
-        if(genreOptional.isPresent()) {
-            return genreOptional.get().getBookList();
+        Genre genre = genreRepository.findByIdAndUserId(genreId, getCurrentLoggedInUser().getId());
+        if(genre != null) {
+            return genre.getBookList();
         }else {
             throw new InformationNotFoundException("Genre with id "+ genreId + " not found");
         }
