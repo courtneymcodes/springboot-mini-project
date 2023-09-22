@@ -69,15 +69,15 @@ public class GenreService {
     }
 
     /**
-     * Gets a genre object by its id
+     * Gets a genre object by its id that is associated with logged in user when a GET request is made to /genres/{genreId}
      * @param genreId path variable
      * @return a genre object
      * @throws InformationNotFoundException no genre matching given id can be found in database
      */
     public Genre getGenre(Long genreId){
-        Optional<Genre> genreOptional = genreRepository.findById(genreId);
-        if(genreOptional.isPresent()){
-            return genreOptional.get();
+        Genre genre = genreRepository.findByIdAndUserId(genreId, getCurrentLoggedInUser().getId());
+        if(genre != null){
+            return genre;
         } else {
             throw new InformationNotFoundException("Genre with id " + genreId + " not found");
         }
