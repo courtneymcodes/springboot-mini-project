@@ -40,11 +40,16 @@ public class GenreService {
     }
 
     /**
-     * Gets all genres from the database when a GET request is made to /genres endpoint
+     * Gets all genres associated with logged in user from the database when a GET request is made to /genres endpoint
      * @return a list of all genres in the database
      */
     public List<Genre> getGenres() {
-        return genreRepository.findAll();
+        List<Genre> genreList = genreRepository.findByUserId(GenreService.getCurrentLoggedInUser().getId());  //get id of logged in user
+        if (genreList.isEmpty()) {
+            throw new InformationNotFoundException("no categories found for user id " + GenreService.getCurrentLoggedInUser().getId());
+        } else {
+            return genreList;
+        }
     }
 
     /**
