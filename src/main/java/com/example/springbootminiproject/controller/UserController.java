@@ -18,8 +18,9 @@ import java.util.Optional;
 @RequestMapping(path = "auth/users")
 public class UserController {
     private UserService userService;
+
     @Autowired
-    public void setUserService(UserService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
@@ -34,7 +35,7 @@ public class UserController {
     }
 
     /**
-     * Returns the result of calling loginUser method on userService to log in a user
+     * Returns the result of calling loginUser method on userService to log in a user when a request is made to the /login/ endpoint
      * @param loginRequest object containing user credentials
      * @return LoginResponse with token or error message
      */
