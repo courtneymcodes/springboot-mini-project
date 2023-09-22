@@ -48,7 +48,7 @@ public class UserService {
         }
     }
 
-    public User findUserByEmailAddress(String emailAddress){
+    public User loadUserByEmailAddress(String emailAddress){
         return userRepository.findUserByEmailAddress(emailAddress);
     }
 
